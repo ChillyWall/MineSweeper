@@ -8,14 +8,13 @@
 namespace ms {
 
 class Grid {
-private:
+  private:
     using CellArray = std::vector<Cell>;
     CellArray cells_;
 
-    int m_;              // rows
-    int n_;              // columns
-    int mine_count_;     // count of mines
-    int flagged_count_;  // count of flagged cells
+    int m_;           // rows
+    int n_;           // columns
+    int mine_count_;  // count of mines
 
     /**
      * @brief generate the mines
@@ -24,44 +23,27 @@ private:
 
     /**
      * @brief upddate the number of cells around the mine at (x, y)
-     *
      * @param x x-coordinate of the mine
      * @param y y-coordinate of the mine
      */
     void update_num(int x, int y);
 
     /**
-     * @brief sweep all cells around the space at (x, y)
-     *
-     * @param x x-coordinate of the space
-     * @param y y-coordinate of the space
+     * @brief reset all cells to 0
      */
-    SweepResult sweep_around(int x, int y);
+    void reset_cells();
 
-    /**
-     * @brief auto sweep the rest of the cells when all mines are flagged
-     *
-     * @param x x-coordinate of the cell
-     * @param y y-coordinate of the cell
-     */
-    SweepResult auto_sweep(int x, int y);
-
-public:
+  public:
     Grid() = default;
-    Grid(int m, int n, int count);
     Grid(const Grid& rhs) = delete;
     Grid(Grid&& rhs) = default;
     ~Grid() = default;
 
+    Grid(int m, int n, int count);
+
     int m() const;
     int n() const;
     int mine_count() const;
-
-    /**
-     * @brief the count of flagged cells
-     * @return the count
-     */
-    int flagged_count() const;
 
     /**
      * @brief get the cell at (m, n)
@@ -80,30 +62,12 @@ public:
     Cell& get_cell(int m, int n);
 
     /**
-     * @brief sweep the cell at (x, y)
-     * @param x x-coordinate
-     * @param y y-coordinate
-     * @return the result of sweeping
+     * @brief regenerate the grid of cells, the cells won't be destroyed if m and n are the same
+     * @param m new m
+     * @param n new n
+     * @param count new count
      */
-
-    SweepResult sweep(int x, int y);
-    /**
-     * @brief flag the cell at (x, y)
-     * @param x x-coordinate
-     * @param y y-coordinate
-     */
-    void flag(int x, int y);
-
-    /**
-     * @brief sweep all cells when losing the game
-     */
-    void sweep_all();
-
-    /**
-     * @brief if the game is finished
-     * @return the result
-     */
-    bool is_finished() const;
+    void regenerate(int m, int n, int count);
 };
 
 }  // namespace ms

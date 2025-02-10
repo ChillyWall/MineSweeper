@@ -25,12 +25,19 @@ void Cell::flag() {
 }
 
 void Cell::unflag() {
-    stat_ = UNKNOWN;
+    if (stat_ == FLAGGED) {
+        stat_ = UNKNOWN;
+    }
 }
 
 SweepResult Cell::sweep() {
     stat_ = OPEN;
     return num_ == -1 ? MINE : SAFE;
+}
+
+void Cell::reset() {
+    num_ = 0;
+    stat_ = UNKNOWN;
 }
 
 }  // namespace ms

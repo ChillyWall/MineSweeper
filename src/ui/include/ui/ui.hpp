@@ -9,7 +9,7 @@ namespace ui {
  * @brief show the grid of cells
  * @param grid the Grid object
  */
-void show_grid(const ms::Grid& grid);
+void show_board(const ms::Grid& grid);
 
 }  // namespace ui
 

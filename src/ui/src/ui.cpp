@@ -4,7 +4,7 @@
 
 namespace ui {
 
-void show_grid(const ms::Grid& grid) {
+void show_board(const ms::Grid& grid) {
     std::system("clear");
     std::cout << "   ";
     for (int i = 0; i < grid.n(); ++i) {

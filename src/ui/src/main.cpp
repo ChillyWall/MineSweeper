@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ms/Grid.hpp>
+#include <ms/Sweeper.hpp>
 #include <string>
 #include <ui/ui.hpp>
 
@@ -14,32 +14,34 @@ int main() {
 }
 
 void game_loop() {
+    ms::Sweeper sweeper;
     while (true) {
         cout << "Please input the size of the grid and the count of mines: ";
         int x, y, z, count;
         cin >> x >> y >> count;
 
-        ms::Grid grid(x, y, count);
+        sweeper.replay(x, y, count);
         do {
-            ui::show_grid(grid);
+            ui::show_board(sweeper.board());
+            cout << sweeper.flagged_count() << "/" << sweeper.board().mine_count() << std::endl;
             cout << "input the coordinates: ";
             cin >> x >> y;
             cout << "sweep(0) or flag(1): ";
             cin >> z;
             if (z == 0) {
-                auto res = grid.sweep(x, y);
+                auto res = sweeper.sweep(x, y);
                 if (res == ms::MINE) {
                     break;
                 }
             } else if (z == 1) {
-                grid.flag(x, y);
+                sweeper.flag(x, y);
             }
-        } while (!grid.is_finished());
+        } while (!sweeper.is_finished());
 
-        grid.sweep_all();
-        ui::show_grid(grid);
+        sweeper.sweep_all_mines();
+        ui::show_board(sweeper.board());
 
-        if (grid.flagged_count() == grid.mine_count()) {
+        if (sweeper.flagged_count() == sweeper.board().mine_count()) {
             cout << "Congratulations! You win!" << std::endl;
         } else {
             cout << "Sorry, you lose!" << std::endl;

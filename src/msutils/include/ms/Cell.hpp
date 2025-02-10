@@ -6,7 +6,7 @@
 namespace ms {
 
 class Cell {
-private:
+  private:
     /* the status of this cell. */
     CellStatus stat_;
 
@@ -14,7 +14,7 @@ private:
      * -1 if there is a mine in this cell */
     int num_;
 
-public:
+  public:
     Cell();
     ~Cell() = default;
     Cell(const Cell& rhs) = default;
@@ -38,20 +38,25 @@ public:
     CellStatus status() const;
 
     /**
-     * @brief flag this cell
+     * @brief flag this cell, set it to FLAGGED
      */
     void flag();
 
     /**
-     * @brief unflag this cell
+     * @brief unflag this cell, set it to UNKNOWN
      */
     void unflag();
 
     /**
-     * @brief to sweep this cell
+     * @brief to sweep this cell, set it to OPEN
      * @return the result
      */
     SweepResult sweep();
+
+    /**
+     * @brief reset status to UNKNOWN, and num to 0
+     */
+    void reset();
 };
 
 }  // namespace ms
