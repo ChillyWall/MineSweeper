@@ -45,7 +45,7 @@ SweepResult Sweeper::sweep(int x, int y, CellFunc callback) {
         case UNKNOWN: {
             res = tmp_cell.sweep();
             if (res == SAFE && tmp_cell.num() == 0) {
-                sweep_around(x, y);
+                sweep_around(x, y, callback);
             }
             break;
         }
@@ -54,7 +54,7 @@ SweepResult Sweeper::sweep(int x, int y, CellFunc callback) {
             break;
         }
         case OPEN: {
-            res = auto_sweep(x, y);
+            res = auto_sweep(x, y, callback);
             break;
         }
     }
@@ -132,7 +132,7 @@ void Sweeper::sweep_all_mines(CellFunc callback) {
     }
 }
 
-bool Sweeper::is_finished() const {
+bool Sweeper::is_won() const {
     if (flagged_count_ != grid_.mine_count()) {
         return false;
     }

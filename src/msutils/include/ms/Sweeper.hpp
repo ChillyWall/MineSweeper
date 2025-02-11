@@ -72,7 +72,7 @@ class Sweeper {
      * @brief if the game is finished
      * @return the result
      */
-    bool is_finished() const;
+    bool is_won() const;
 
     /**
      * @brief replay the game

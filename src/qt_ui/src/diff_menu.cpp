@@ -8,9 +8,6 @@ DiffMenu::DiffMenu(QWidget* parent) : QWidget(parent) {
 }
 
 void DiffMenu::init_ui() {
-    diffs_layout = new QGridLayout;
-    setLayout(diffs_layout);
-
     QString style("QPushButton { text-align: center }");
 
     easy_diff_btn = new QPushButton;
@@ -29,10 +26,12 @@ void DiffMenu::init_ui() {
     cust_diff_btn->setText("?\nCustom");
     cust_diff_btn->setStyleSheet(style);
 
+    diffs_layout = new QGridLayout;
     diffs_layout->addWidget(easy_diff_btn, 0, 0);
     diffs_layout->addWidget(medium_diff_btn, 0, 1);
     diffs_layout->addWidget(hard_diff_btn, 1, 0);
     diffs_layout->addWidget(cust_diff_btn, 1, 1);
+    setLayout(diffs_layout);
 }
 
 void DiffMenu::init_signal_slots() {
@@ -40,4 +39,5 @@ void DiffMenu::init_signal_slots() {
     connect(medium_diff_btn, &QPushButton::clicked, this,
             [this]() { emit start_game(16, 16, 40); });
     connect(hard_diff_btn, &QPushButton::clicked, this, [this]() { emit start_game(16, 30, 99); });
+    connect(cust_diff_btn, &QPushButton::clicked, this, [this]() { emit cust_diff(); });
 }

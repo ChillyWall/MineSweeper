@@ -24,7 +24,7 @@ void Main::init_signal_slots() {
     connect(cust_diff_form, &CustDiffForm::start_game, this, &Main::do_start_game);
     connect(cust_diff_form, &CustDiffForm::new_game, this, &Main::do_new_game);
 
-    connect(game_field, &GameField::new_game, this, &Main::do_new_game);
+    connect(game_field, &GameField::change_diff, this, &Main::do_new_game);
 }
 
 void Main::do_start_game(int row, int col, int mine_count) {

@@ -1,6 +1,5 @@
 #include <ms/Grid.hpp>
 #include <random>
-#include "ms/msdefs.hpp"
 
 namespace ms {
 

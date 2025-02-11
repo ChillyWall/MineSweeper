@@ -36,7 +36,7 @@ void game_loop() {
             } else if (z == 1) {
                 sweeper.flag(x, y);
             }
-        } while (!sweeper.is_finished());
+        } while (!sweeper.is_won());
 
         sweeper.sweep_all_mines();
         ui::show_board(sweeper.board());

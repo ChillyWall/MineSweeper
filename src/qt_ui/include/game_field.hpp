@@ -1,10 +1,12 @@
 #ifndef GAME_FIELD_HPP
 #define GAME_FIELD_HPP
 
+#include <functional>
 #include <ms/Sweeper.hpp>
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QHBoxLayout>
+#include <QIcon>
 #include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -19,7 +21,7 @@ class CellButton : public QPushButton {
     CellButton(QWidget* parent = nullptr);
     ~CellButton() override = default;
 
-    void set(int x, int y, ms::Cell* cell);
+    void set(int i, int j, ms::Cell* cell);
     int x() const;
     int y() const;
 
@@ -29,9 +31,6 @@ class CellButton : public QPushButton {
     int x_;
     int y_;
     ms::Cell* cell_;
-
-    void init_ui();
-    void init_signal_slots();
 };
 
 class GameField : public QWidget {
@@ -39,16 +38,31 @@ class GameField : public QWidget {
 
   public:
     GameField(QWidget* parent = nullptr);
-    ~GameField() override = default;
+    ~GameField() override;
 
     void init_game(int row, int col, int mine_count);
 
   signals:
-    void new_game();
+    void change_diff();
+
     void update_cell(int x, int y);
+
+    void sweep(int x, int y);
+    void auto_sweep(int x, int y);
+    void flag(int x, int y);
+
+    void win_game();
+    void lose_game();
 
   private slots:
     void do_update_cell(int x, int y);
+
+    void do_sweep(int x, int y);
+    void do_auto_sweep(int x, int y);
+    void do_flag(int x, int y);
+
+    void do_win_game();
+    void do_lose_game();
 
   private:
     QHBoxLayout* main_lay;
@@ -62,10 +76,21 @@ class GameField : public QWidget {
 
     ms::Sweeper sweeper;
 
-    QVector<CellButton> cell_buttons;
+    QVector<CellButton*> cell_buttons;
 
     void init_ui();
     void init_signal_slots();
+    void init_board();
+    void refresh_board();
+    void update_score();
+    void check_sweep(ms::SweepResult);
+
+    std::function<void(int, int)> update_callback;
+
+    QIcon icon_closed;
+    QIcon icon_flag;
+    QIcon icon_mine;
+    QVector<QIcon> icon_nums;
 
   protected:
     bool eventFilter(QObject* obj, QEvent* event) override;

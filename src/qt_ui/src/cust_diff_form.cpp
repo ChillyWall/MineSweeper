@@ -7,37 +7,35 @@ CustDiffForm::CustDiffForm(QWidget* parent) : QWidget(parent) {
 }
 
 void CustDiffForm::init_ui() {
-    main_lay = new QVBoxLayout;
-    setLayout(main_lay);
-
     // the layout of the form
     form_lay = new QFormLayout;
 
-    row_label = new QLabel("Rows", this);
-    row_spinbox = new QSpinBox(this);
-
-    col_label = new QLabel("Columns", this);
-    col_spinbox = new QSpinBox(this);
-
-    mine_count_label = new QLabel("Mines", this);
-    mine_count_spinbox = new QSpinBox(this);
-
+    row_label = new QLabel("Rows");
+    row_spinbox = new QSpinBox;
     form_lay->addRow(row_label, row_spinbox);
+
+    col_label = new QLabel("Columns");
+    col_spinbox = new QSpinBox;
     form_lay->addRow(col_label, col_spinbox);
+
+    mine_count_label = new QLabel("Mines");
+    mine_count_spinbox = new QSpinBox;
     form_lay->addRow(mine_count_label, mine_count_spinbox);
 
     // the layout of the buttons
-    btns_lay = new QVBoxLayout(this);
+    btns_lay = new QVBoxLayout;
 
-    start_btn = new QPushButton("Play Game", this);
-    cancel_btn = new QPushButton("Cancel", this);
-
+    start_btn = new QPushButton("Play Game");
     btns_lay->addWidget(start_btn);
+
+    cancel_btn = new QPushButton("Cancel");
     btns_lay->addWidget(cancel_btn);
 
     // the main layout
+    main_lay = new QVBoxLayout;
     main_lay->addLayout(form_lay);
     main_lay->addLayout(btns_lay);
+    setLayout(main_lay);
 }
 
 void CustDiffForm::init_signal_slots() {

@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="/">
+    <file>resources/closed.svg</file>
+    <file>resources/flag.svg</file>
+    <file>resources/mine.svg</file>
+    <file>resources/pressed.svg</file>
+    <file>resources/type1.svg</file>
+    <file>resources/type2.svg</file>
+    <file>resources/type3.svg</file>
+    <file>resources/type4.svg</file>
+    <file>resources/type5.svg</file>
+    <file>resources/type6.svg</file>
+    <file>resources/type7.svg</file>
+    <file>resources/type8.svg</file>
+  </qresource>
+</RCC>
