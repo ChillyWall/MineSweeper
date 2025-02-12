@@ -5,7 +5,12 @@
 namespace ui {
 
 void show_board(const ms::Grid& grid) {
+#if defined(__WIN32)
+    std::system("cls");
+#elif defined(__linux__)
     std::system("clear");
+#endif
+
     std::cout << "   ";
     for (int i = 0; i < grid.n(); ++i) {
         std::cout << i << " ";
