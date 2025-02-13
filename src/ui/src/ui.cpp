@@ -108,6 +108,9 @@ void print_number(int num) {
         case 8:
             printf("\033[38;2;128;128;128m8");
             break;
+        case -1:
+            printf("\033[38;2;255;255;255m\U000f0dda");
+            break;
     }
     printf("\033[39m");
 }
