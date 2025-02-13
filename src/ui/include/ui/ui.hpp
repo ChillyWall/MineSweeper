@@ -11,6 +11,10 @@ namespace ui {
  */
 void show_board(const ms::Grid& grid);
 
+void print_cell(const ms::Cell& cell);
+
+void print_number(int num);
+
 }  // namespace ui
 
 #endif

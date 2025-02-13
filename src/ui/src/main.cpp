@@ -23,7 +23,8 @@ void game_loop() {
         sweeper.replay(x, y, count);
         do {
             ui::show_board(sweeper.board());
-            cout << sweeper.flagged_count() << "/" << sweeper.board().mine_count() << std::endl;
+            cout << sweeper.flagged_count() << "/"
+                 << sweeper.board().mine_count() << std::endl;
             cout << "input the coordinates: ";
             cin >> x >> y;
             cout << "sweep(0) or flag(1): ";
