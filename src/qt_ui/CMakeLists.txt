@@ -1,5 +1,4 @@
 find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
-find_package(glog REQUIRED)
 find_package(fmt REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
@@ -25,7 +24,7 @@ set(RESOURCES resources.qrc)
 add_executable(MineSweeper-qt ${SOURCES} ${HEADERS} ${RESOURCES})
 target_link_libraries(
     MineSweeper-qt
-    PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets msutils glog::glog fmt::fmt
+    PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets msutils fmt::fmt
 )
 qt6_add_resources(MineSweeper-qt resources.qrc)
 target_include_directories(MineSweeper-qt PRIVATE include)

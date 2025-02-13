@@ -1,4 +1,3 @@
-#include <fmt/format.h>
 #include <game_field.hpp>
 #include <ms/Sweeper.hpp>
 #include <QEvent>
@@ -11,7 +10,8 @@
 #include <QVector>
 #include "ms/msdefs.hpp"
 
-GameField::GameField(QWidget* parent) : QWidget(parent), sweeper(), icon_nums(9) {
+GameField::GameField(QWidget* parent)
+    : QWidget(parent), sweeper(), icon_nums(9) {
     init_ui();
     init_signal_slots();
 
@@ -64,7 +64,8 @@ void GameField::init_signal_slots() {
         auto& grid = sweeper.board();
         init_game(grid.m(), grid.n(), grid.mine_count());
     });
-    connect(change_diff_btn, &QPushButton::clicked, this, [this]() { emit change_diff(); });
+    connect(change_diff_btn, &QPushButton::clicked, this,
+            [this]() { emit change_diff(); });
 
     connect(this, &GameField::update_cell, this, &GameField::do_update_cell);
     connect(this, &GameField::sweep, this, &GameField::do_sweep);
@@ -146,8 +147,9 @@ void GameField::do_update_cell(int x, int y) {
 }
 
 void GameField::update_score() {
-    scores->setText(
-        QString("Score: %1/%2").arg(sweeper.flagged_count()).arg(sweeper.board().mine_count()));
+    scores->setText(QString("Score: %1/%2")
+                        .arg(sweeper.flagged_count())
+                        .arg(sweeper.board().mine_count()));
 }
 
 void GameField::check_sweep(ms::SweepResult result) {
@@ -231,7 +233,8 @@ bool GameField::eventFilter(QObject* obj, QEvent* event) {
     return QWidget::eventFilter(obj, event);
 }
 
-CellButton::CellButton(QWidget* parent) : QPushButton(parent), x_(-1), y_(-1), cell_(nullptr) {
+CellButton::CellButton(QWidget* parent)
+    : QPushButton(parent), x_(-1), y_(-1), cell_(nullptr) {
     setIconSize(QSize(32, 32));
 }
 

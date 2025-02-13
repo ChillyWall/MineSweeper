@@ -21,7 +21,8 @@ void Main::init_signal_slots() {
     connect(diff_menu, &DiffMenu::start_game, this, &Main::do_start_game);
     connect(diff_menu, &DiffMenu::cust_diff, this, &Main::do_cust_diff);
 
-    connect(cust_diff_form, &CustDiffForm::start_game, this, &Main::do_start_game);
+    connect(cust_diff_form, &CustDiffForm::start_game, this,
+            &Main::do_start_game);
     connect(cust_diff_form, &CustDiffForm::new_game, this, &Main::do_new_game);
 
     connect(game_field, &GameField::change_diff, this, &Main::do_new_game);

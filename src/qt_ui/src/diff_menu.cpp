@@ -35,9 +35,12 @@ void DiffMenu::init_ui() {
 }
 
 void DiffMenu::init_signal_slots() {
-    connect(easy_diff_btn, &QPushButton::clicked, this, [this]() { emit start_game(8, 8, 10); });
+    connect(easy_diff_btn, &QPushButton::clicked, this,
+            [this]() { emit start_game(8, 8, 10); });
     connect(medium_diff_btn, &QPushButton::clicked, this,
             [this]() { emit start_game(16, 16, 40); });
-    connect(hard_diff_btn, &QPushButton::clicked, this, [this]() { emit start_game(16, 30, 99); });
-    connect(cust_diff_btn, &QPushButton::clicked, this, [this]() { emit cust_diff(); });
+    connect(hard_diff_btn, &QPushButton::clicked, this,
+            [this]() { emit start_game(16, 30, 99); });
+    connect(cust_diff_btn, &QPushButton::clicked, this,
+            [this]() { emit cust_diff(); });
 }

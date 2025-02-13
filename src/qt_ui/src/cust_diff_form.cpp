@@ -40,8 +40,10 @@ void CustDiffForm::init_ui() {
 
 void CustDiffForm::init_signal_slots() {
     connect(start_btn, &QPushButton::clicked, this, [this]() {
-        emit start_game(row_spinbox->value(), col_spinbox->value(), mine_count_spinbox->value());
+        emit start_game(row_spinbox->value(), col_spinbox->value(),
+                        mine_count_spinbox->value());
     });
 
-    connect(cancel_btn, &QPushButton::clicked, this, [this]() { emit new_game(); });
+    connect(cancel_btn, &QPushButton::clicked, this,
+            [this]() { emit new_game(); });
 }
