@@ -90,6 +90,7 @@ class GameField : public QWidget {
     QIcon icon_closed;
     QIcon icon_flag;
     QIcon icon_mine;
+    QIcon icon_red_mine;
     QVector<QIcon> icon_nums;
 
   protected:

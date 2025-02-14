@@ -12,14 +12,17 @@ void CustDiffForm::init_ui() {
 
     row_label = new QLabel("Rows");
     row_spinbox = new QSpinBox;
+    row_spinbox->setMaximum(45);
     form_lay->addRow(row_label, row_spinbox);
 
     col_label = new QLabel("Columns");
     col_spinbox = new QSpinBox;
+    col_spinbox->setMaximum(72);
     form_lay->addRow(col_label, col_spinbox);
 
     mine_count_label = new QLabel("Mines");
     mine_count_spinbox = new QSpinBox;
+    mine_count_spinbox->setMaximum(700);
     form_lay->addRow(mine_count_label, mine_count_spinbox);
 
     // the layout of the buttons

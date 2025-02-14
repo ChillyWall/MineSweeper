@@ -1,3 +1,4 @@
+#include <qsize.h>
 #include <game_field.hpp>
 #include <ms/Sweeper.hpp>
 #include <QEvent>
@@ -21,6 +22,7 @@ GameField::GameField(QWidget* parent)
     icon_closed = QIcon(prefix.arg("closed"));
     icon_flag = QIcon(prefix.arg("flag"));
     icon_mine = QIcon(prefix.arg("mine"));
+    icon_red_mine = QIcon(prefix.arg("red_mine"));
     icon_nums[0] = QIcon(prefix.arg("pressed"));
 
     for (int i = 1; i < 9; ++i) {
@@ -38,11 +40,14 @@ GameField::~GameField() {
 }
 
 void GameField::init_ui() {
+    this->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+
     main_lay = new QHBoxLayout(this);
 
     board = new QGroupBox;
     board_lay = new QGridLayout(board);
     board_lay->setContentsMargins(0, 0, 0, 0);
+    board_lay->setSpacing(0);
 
     side_panel = new QGroupBox;
     side_panel_lay = new QVBoxLayout(side_panel);
@@ -139,6 +144,8 @@ void GameField::do_update_cell(int x, int y) {
         case ms::OPEN: {
             if (cell.num() == -1) {
                 btn->setIcon(icon_mine);
+            } else if (cell.num() == -2) {
+                btn->setIcon(icon_red_mine);
             } else {
                 btn->setIcon(icon_nums[cell.num()]);
             }
@@ -183,12 +190,17 @@ void GameField::do_flag(int x, int y) {
 
 void GameField::do_win_game() {
     scores->setText("You Win!");
+    sweeper.end_game();
 }
 void GameField::do_lose_game() {
     scores->setText("You Lose!");
+    sweeper.end_game();
 }
 
 bool GameField::eventFilter(QObject* obj, QEvent* event) {
+    if (sweeper.is_ended()) {
+        return QWidget::eventFilter(obj, event);
+    }
     switch (event->type()) {
         case QEvent::MouseButtonPress: {
             auto* btn = qobject_cast<CellButton*>(obj);
@@ -235,7 +247,9 @@ bool GameField::eventFilter(QObject* obj, QEvent* event) {
 
 CellButton::CellButton(QWidget* parent)
     : QPushButton(parent), x_(-1), y_(-1), cell_(nullptr) {
-    setIconSize(QSize(32, 32));
+    setIconSize(QSize(24, 24));
+    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    setContentsMargins(0, 0, 0, 0);
 }
 
 int CellButton::x() const {
