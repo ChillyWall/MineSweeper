@@ -12,6 +12,7 @@ class Sweeper {
   private:
     Grid grid_;
     int flagged_count_;  // count of flagged cells
+    bool is_ended_;
 
   public:
     Sweeper();
@@ -34,7 +35,8 @@ class Sweeper {
      * @brief sweep the cell at (x, y)
      * @param x x-coordinate
      * @param y y-coordinate
-     * @param callback the callback function operatoed on the cell after sweeping
+     * @param callback the callback function operatoed on the cell after
+     * sweeping
      * @return the result of sweeping
      */
     SweepResult sweep(int x, int y, CellFunc callback = nullptr);
@@ -73,6 +75,9 @@ class Sweeper {
      * @return the result
      */
     bool is_won() const;
+
+    bool is_ended() const;
+    void end_game();
 
     /**
      * @brief replay the game

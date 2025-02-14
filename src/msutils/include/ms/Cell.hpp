@@ -31,6 +31,8 @@ class Cell {
      */
     void set_num(int number);
 
+    void set_status(CellStatus status);
+
     /**
      * @brief the status of this cell
      * @return the status

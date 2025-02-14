@@ -10,10 +10,14 @@ int Cell::num() const {
 }
 
 void Cell::set_num(int number) {
-    if (num_ < -1 || num_ > 8) {
+    if (num_ < -2 || num_ > 8) {
         throw std::invalid_argument("invalid number");
     }
     num_ = number;
+}
+
+void Cell::set_status(CellStatus status) {
+    stat_ = status;
 }
 
 CellStatus Cell::status() const {
@@ -21,7 +25,9 @@ CellStatus Cell::status() const {
 }
 
 void Cell::flag() {
-    stat_ = FLAGGED;
+    if (stat_ == UNKNOWN) {
+        stat_ = FLAGGED;
+    }
 }
 
 void Cell::unflag() {
@@ -31,8 +37,11 @@ void Cell::unflag() {
 }
 
 SweepResult Cell::sweep() {
-    stat_ = OPEN;
-    return num_ == -1 ? MINE : SAFE;
+    if (stat_ == UNKNOWN) {
+        stat_ = OPEN;
+        return num_ == -1 ? MINE : SAFE;
+    }
+    return SAFE;
 }
 
 void Cell::reset() {
