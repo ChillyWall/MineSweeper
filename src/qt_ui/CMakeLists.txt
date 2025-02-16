@@ -24,10 +24,20 @@ set(RESOURCES resources.qrc)
 
 add_executable(MineSweeper-qt ${SOURCES} ${HEADERS} ${RESOURCES})
 target_link_libraries(MineSweeper-qt PRIVATE msutils ${RUNTIME_LIBS})
-qt6_add_resources(MineSweeper-qt resources.qrc)
 target_include_directories(MineSweeper-qt PRIVATE include)
 
 install(TARGETS MineSweeper-qt DESTINATION bin)
 if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+    # # fill in the path to your Qt installation, like C:/Qt/6.8.1/mingw_64
+    # set(QT_INSTALL_PATH "")
+    # install(
+    #     FILES ${QT_INSTALL_PATH}/plugins/platforms/qwindows.dll
+    #     DESTINATION bin/plugins/platforms
+    # )
+    # install(
+    #     FILES ${QT_INSTALL_PATH}/plugins/iconengines/qsvgicon.dll
+    #     DESTINATION bin/plugins/iconengines
+    # )
+    set_target_properties(MineSweeper-qt PROPERTIES WIN32_EXECUTABLE TRUE)
     install(IMPORTED_RUNTIME_ARTIFACTS ${RUNTIME_LIBS} DESTINATION bin)
 endif()
