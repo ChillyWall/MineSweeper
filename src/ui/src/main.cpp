@@ -19,7 +19,11 @@ void game_loop() {
         cout << "Please input the size of the grid and the count of mines: ";
         int x, y, z, count;
         cin >> x >> y >> count;
-
+        if (x * y < count) {
+            cout << "The number of mines is greater than the number of cells."
+                 << std::endl;
+            continue;
+        }
         sweeper.replay(x, y, count);
         do {
             ui::show_board(sweeper.board());

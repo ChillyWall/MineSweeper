@@ -34,7 +34,7 @@ class CustDiffForm : public QWidget {
 
     QPushButton* start_btn;
     QPushButton* cancel_btn;
-
+    QLabel* error_msg;
     void init_ui();
     void init_signal_slots();
 };

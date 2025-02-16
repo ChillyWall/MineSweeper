@@ -27,6 +27,11 @@ void CustDiffForm::init_ui() {
 
     // the layout of the buttons
     btns_lay = new QVBoxLayout;
+    error_msg = new QLabel;
+    error_msg->setStyleSheet("QLabel { color : red; }");
+    error_msg->setAlignment(Qt::AlignCenter);
+    error_msg->setText("");
+    btns_lay->addWidget(error_msg);
 
     start_btn = new QPushButton("Play Game");
     btns_lay->addWidget(start_btn);
@@ -43,8 +48,15 @@ void CustDiffForm::init_ui() {
 
 void CustDiffForm::init_signal_slots() {
     connect(start_btn, &QPushButton::clicked, this, [this]() {
+        if (row_spinbox->value() * col_spinbox->value() <
+            mine_count_spinbox->value()) {
+            error_msg->setText(
+                "Mines count should be less than the total cells");
+            return;
+        }
         emit start_game(row_spinbox->value(), col_spinbox->value(),
                         mine_count_spinbox->value());
+        error_msg->setText("");
     });
 
     connect(cancel_btn, &QPushButton::clicked, this,
