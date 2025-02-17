@@ -59,6 +59,22 @@ class Cell {
      * @brief reset status to UNKNOWN, and num to 0
      */
     void reset();
+
+    /**
+     * @brief set this cell to a mine
+     */
+    void set_mine();
+
+    /**
+     * @brief set this cell to the first swept mine
+     */
+    void set_mine_swept();
+
+    /**
+     * @brief the type of this cell
+     * @return the enum of the type
+     */
+    CellType type() const;
 };
 
 }  // namespace ms

@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <ui/ui.hpp>
+#include "ms/msdefs.hpp"
 
 namespace ui {
 
@@ -72,8 +73,17 @@ void print_cell(const ms::Cell& cell) {
             printf("\033[31m\uf024");
             break;
         case ms::OPEN:
-            print_number(cell.num());
-            break;
+            switch (cell.type()) {
+                case ms::SWEPT_MINE:
+                    printf("\033[38;2;255;0;0m\U000f0dda");
+                    break;
+                case ms::NORMAL_MINE:
+                    printf("\033[38;2;255;255;255m\U000f0dda");
+                    break;
+                case ms::NUMBER:
+                    print_number(cell.num());
+                    break;
+            }
     }
 
     printf("\033[0m");
@@ -107,12 +117,6 @@ void print_number(int num) {
             break;
         case 8:
             printf("\033[38;2;128;128;128m8");
-            break;
-        case -1:
-            printf("\033[38;2;255;255;255m\U000f0dda");
-            break;
-        case -2:
-            printf("\033[38;2;255;0;0m\U000f0dda");
             break;
     }
     printf("\033[39m");

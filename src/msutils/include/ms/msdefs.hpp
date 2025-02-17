@@ -2,6 +2,7 @@
 #define MS_DEFS_HPP
 
 #include <cstddef>
+#include <stdexcept>
 
 namespace ms {
 
@@ -17,7 +18,21 @@ enum CellStatus { UNKNOWN, FLAGGED, OPEN };
  * NORMAL for other occasions */
 enum SweepResult { MINE, SAFE };
 
+enum CellType { SWEPT_MINE = -2, NORMAL_MINE = -1, NUMBER };
+
 using size_t = std::size_t;
+
+struct TooManyMines : public std::invalid_argument {
+    TooManyMines()
+        : std::invalid_argument(
+              "Too many mines which are more than the cells.") {}
+    using std::invalid_argument::invalid_argument;
+};
+
+struct NotMine : public std::runtime_error {
+    NotMine() : std::runtime_error("This cell doesn't contain a mine.") {}
+    using std::runtime_error::runtime_error;
+};
 
 }  // namespace ms
 

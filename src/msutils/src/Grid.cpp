@@ -1,9 +1,11 @@
 #include <ms/Grid.hpp>
 #include <random>
+#include "ms/msdefs.hpp"
 
 namespace ms {
 
-Grid::Grid(int m, int n, int count) : cells_(m * n), m_(m), n_(n), mine_count_(count) {
+Grid::Grid(int m, int n, int count)
+    : cells_(m * n), m_(m), n_(n), mine_count_(count) {
     generate();
 }
 
@@ -45,9 +47,9 @@ void Grid::generate() {
         int y = ygen(e);
 
         auto& tmp_cell = cells_.at(x * n_ + y);
-        if (tmp_cell.num() != -1) {
+        if (tmp_cell.type() != NORMAL_MINE) {
             ++count;
-            tmp_cell.set_num(-1);
+            tmp_cell.set_mine();
             update_num(x, y);
         }
     }
@@ -56,6 +58,9 @@ void Grid::generate() {
 void Grid::regenerate(int m, int n, int count) {
     if (!(m == m_ && n == n_)) {
         cells_.resize(m * n);
+    }
+    if (m * n < count) {
+        throw TooManyMines();
     }
     m_ = m;
     n_ = n;

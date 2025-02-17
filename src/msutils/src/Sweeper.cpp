@@ -1,6 +1,7 @@
 #include <ms/Grid.hpp>
 #include <ms/Sweeper.hpp>
 #include "ms/Cell.hpp"
+#include "ms/msdefs.hpp"
 
 namespace ms {
 
@@ -29,7 +30,7 @@ void Grid::update_num(int x, int y) {
             }
 
             auto& tmp_cell = cells_.at(i * n_ + j);
-            if (tmp_cell.num() == -1) {
+            if (tmp_cell.type() == NORMAL_MINE) {
                 continue;
             }
 
@@ -47,7 +48,7 @@ SweepResult Sweeper::sweep(int x, int y, CellFunc callback) {
             if (res == SAFE && tmp_cell.num() == 0) {
                 sweep_around(x, y, callback);
             } else if (res == MINE && !is_ended_) {
-                tmp_cell.set_num(-2);
+                tmp_cell.set_mine_swept();
                 is_ended_ = true;
             }
             break;
@@ -130,7 +131,7 @@ void Sweeper::sweep_all_mines(CellFunc callback) {
     for (int i = 0; i < grid_.m(); ++i) {
         for (int j = 0; j < grid_.n(); ++j) {
             auto& tmp_cell = grid_.get_cell(i, j);
-            if (tmp_cell.status() != OPEN && tmp_cell.num() == -1) {
+            if (tmp_cell.status() != OPEN && tmp_cell.type() == NORMAL_MINE) {
                 tmp_cell.set_status(OPEN);
                 if (callback) {
                     callback(i, j);

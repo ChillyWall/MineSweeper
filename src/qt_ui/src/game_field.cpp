@@ -142,12 +142,16 @@ void GameField::do_update_cell(int x, int y) {
             break;
         }
         case ms::OPEN: {
-            if (cell.num() == -1) {
-                btn->setIcon(icon_mine);
-            } else if (cell.num() == -2) {
-                btn->setIcon(icon_red_mine);
-            } else {
-                btn->setIcon(icon_nums[cell.num()]);
+            switch (cell.type()) {
+                case ms::NORMAL_MINE:
+                    btn->setIcon(icon_mine);
+                    break;
+                case ms::SWEPT_MINE:
+                    btn->setIcon(icon_red_mine);
+                    break;
+                case ms::NUMBER:
+                    btn->setIcon(icon_nums[cell.num()]);
+                    break;
             }
         }
     }

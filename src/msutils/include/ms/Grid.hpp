@@ -62,7 +62,9 @@ class Grid {
     Cell& get_cell(int m, int n);
 
     /**
-     * @brief regenerate the grid of cells, the cells won't be destroyed if m and n are the same
+     * @brief regenerate the grid of cells, the cells won't be destroyed if m
+     * and n are the same. if m * n < count, TooManyMines exception will be
+     * thrown.
      * @param m new m
      * @param n new n
      * @param count new count
