@@ -1,7 +1,7 @@
 #include <iostream>
 #include <ms/Sweeper.hpp>
 #include <string>
-#include <ui/ui.hpp>
+#include <ui.hpp>
 
 using std::cin;
 using std::cout;
