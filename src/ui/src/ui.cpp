@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
-#include <ui/ui.hpp>
+#include <ui.hpp>
 #include "ms/msdefs.hpp"
 
 namespace ui {
