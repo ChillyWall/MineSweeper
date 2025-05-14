@@ -41,7 +41,7 @@ void Grid::update_num(int x, int y) {
 
 SweepResult Sweeper::sweep(int x, int y, CellFunc callback) {
     auto& tmp_cell = grid_.get_cell(x, y);
-    SweepResult res;
+    SweepResult res = SAFE;
     switch (tmp_cell.status()) {
         case UNKNOWN: {
             res = tmp_cell.sweep();

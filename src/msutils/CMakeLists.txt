@@ -1,2 +1,10 @@
 add_library(msutils STATIC src/Cell.cpp src/Grid.cpp src/Sweeper.cpp)
 target_include_directories(msutils PUBLIC include)
+
+if(${CMAKE_CXX_COMPILER_ID} STREQUAL "MSVC")
+    target_compile_options(msutils PUBLIC /W4)
+elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
+    target_compile_options(msutils PUBLIC -Wall -Wextra -Wpedantic)
+elseif(elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang"))
+    target_compile_options(msutils PUBLIC -Wall -Wextra -Wpedantic)
+endif()

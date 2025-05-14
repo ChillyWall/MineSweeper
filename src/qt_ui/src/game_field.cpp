@@ -34,7 +34,7 @@ GameField::~GameField() {
     auto& grid = sweeper.board();
     size_t btn_num = grid.m() * grid.n();
     size_t capacity = cell_buttons.size();
-    for (int i = 0; i < capacity - btn_num; ++i) {
+    for (size_t i = 0; i < capacity - btn_num; ++i) {
         delete cell_buttons[btn_num + i];
     }
 }
@@ -98,7 +98,7 @@ void GameField::init_board() {
     size_t capacity = cell_buttons.size();
     if (btn_num > capacity) {
         cell_buttons.resize(btn_num);
-        for (int i = 0; i < btn_num - capacity; ++i) {
+        for (size_t i = 0; i < btn_num - capacity; ++i) {
             cell_buttons[capacity + i] = new CellButton;
         }
     }
